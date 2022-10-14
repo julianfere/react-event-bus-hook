@@ -46,16 +46,14 @@ const PublisherComponent = () => {
 
 const SubscriberComponent = () => {
   const { subscribe } = useEventBus<BusEvents>();
-  const [message, setMessage] = useState("");
-
-  //TODO: Fix message display in texbox
+  const [message, setMessage] = useState<string[]>([]);
 
   subscribe("Test", (payload) => {
-    setMessage((message) => message + `\n ${JSON.stringify(payload)}`);
+    setMessage([...message, `\n ${JSON.stringify(payload)}`]);
   });
 
   subscribe("AnotherTestMessage", (payload) => {
-    setMessage((message) => message + `\n ${JSON.stringify(payload)}`);
+    setMessage([...message, `\n ${JSON.stringify(payload)}`]);
   });
 
   return <textarea className="log" value={message} onChange={() => {}} />;
